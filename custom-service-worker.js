@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.145655f30825a5fb6344e7b549219bed.js");
+importScripts("/precache-manifest.92f44eda7732b88a00bc9b02ee31887b.js");
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js');
 
@@ -25,24 +25,15 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  'http://localhost:3000/items',
+  'https://demobase.github.io/',
   workbox.strategies.networkFirst()
 )
 
-workbox.routing.registerRoute(
-  'https://pwademo.github.io/',
-  workbox.strategies.networkFirst()
-)
-
-workbox.routing.registerRoute(
-  'https://pwademo.github.io/items',
-  workbox.strategies.networkFirst()
-)
 
 workbox.routing.registerRoute(
   new RegExp('^https://jsonserver.github.io/'),
-  workbox.strategies.cacheFirst({
-    cacheName: 'image-cache',
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'json-cache',
     plugins: [
       new workbox.cacheableResponse.Plugin({
         statuses: [0, 200],
